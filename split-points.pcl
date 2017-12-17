@@ -1,0 +1,15 @@
+# Pick split points for $1 parts from first words of stdin.
+
+set n 0
+while {>= [gets stdin line] 0} {
+  set row($n) [lindex [split $line] 0]
+  incr n
+}
+puts "n=$n"
+set p [lindex $argv 0]  ;# number of parts
+
+for {set i 1} {< $i $p} {incr i} {
+  set x [/ [* 1000 $i] $p]
+  set y [/ [* $x $n] 1000]
+  puts "   i=$i   x=$x   y=$y   row(y)=$row($y)  "
+}
